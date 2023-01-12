@@ -1,0 +1,24 @@
+project:
+  key: PEGASUS
+  name: Pegasus
+  plans:
+    - key: BNT51
+      name: Build and Test (master)
+      scm:
+        - !git
+          name: Pegasus
+          url: https://github.com/pegasus-isi/pegasus.git
+          branch: master
+      stages:
+        - name: Source Checkout
+          jobs:
+            - key: DIST
+              name: Source checkout and distribution
+              description: Create the full distribution tarball
+              tasks:
+                - !checkout
+                  description: Checks the Pegasus code out from our source repository
+                  forceCleanBuild: true
+                  repositories:
+                    - name: Pegasus
+                      checkoutDirectory: pegasus-source
